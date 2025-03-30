@@ -1,4 +1,7 @@
 # AceAI
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/69d3d1e3-fa7e-42d7-8857-4f5df36edef7" width="500">
+</p>
 
 AceAI is a deep learning-based image classification model for playing cards. It uses EfficientNet as the backbone model and is trained on a dataset of playing cards to classify different card types accurately.
 
