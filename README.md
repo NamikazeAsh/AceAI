@@ -52,7 +52,8 @@ for epoch in range(num_epochs):
         running_loss += loss.item() * labels.size(0)
     print(f"Epoch {epoch+1}/{num_epochs}, Loss: {running_loss/len(train_loader.dataset)}")
 ```
-Achieved
+# Accuracy
+The accuracy obtained was 98.49% after 20 epochs.
 ```python
 Validation loop: 100%
  9/9 [00:00<00:00, 16.93it/s]
