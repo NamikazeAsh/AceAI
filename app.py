@@ -41,20 +41,20 @@ transform = transforms.Compose([
 
 # The card dictionary mapping index to card name
 card_dict = {
-    0: 'ace of clubs', 1: 'ace of diamonds', 2: 'ace of hearts', 3: 'ace of spades', 
-    4: 'eight of clubs', 5: 'eight of diamonds', 6: 'eight of hearts', 7: 'eight of spades', 
-    8: 'five of clubs', 9: 'five of diamonds', 10: 'five of hearts', 11: 'five of spades', 
-    12: 'four of clubs', 13: 'four of diamonds', 14: 'four of hearts', 15: 'four of spades', 
-    16: 'jack of clubs', 17: 'jack of diamonds', 18: 'jack of hearts', 19: 'jack of spades', 
-    20: 'joker', 21: 'king of clubs', 22: 'king of diamonds', 23: 'king of hearts', 
-    24: 'king of spades', 25: 'nine of clubs', 26: 'nine of diamonds', 27: 'nine of hearts', 
-    28: 'nine of spades', 29: 'queen of clubs', 30: 'queen of diamonds', 31: 'queen of hearts', 
-    32: 'queen of spades', 33: 'seven of clubs', 34: 'seven of diamonds', 35: 'seven of hearts', 
-    36: 'seven of spades', 37: 'six of clubs', 38: 'six of diamonds', 39: 'six of hearts', 
-    40: 'six of spades', 41: 'ten of clubs', 42: 'ten of diamonds', 43: 'ten of hearts', 
-    44: 'ten of spades', 45: 'three of clubs', 46: 'three of diamonds', 47: 'three of hearts', 
-    48: 'three of spades', 49: 'two of clubs', 50: 'two of diamonds', 51: 'two of hearts', 
-    52: 'two of spades'
+    0: 'A♣️', 1: 'A♦️', 2: 'A♥️', 3: 'A♠️',
+    4: '8♣️', 5: '8♦️', 6: '8♥️', 7: '8♠️',
+    8: '5♣️', 9: '5♦️', 10: '5♥️', 11: '5♠️',
+    12: '4♣️', 13: '4♦️', 14: '4♥️', 15: '4♠️',
+    16: 'J♣️', 17: 'J♦️', 18: 'J♥️', 19: 'J♠️',
+    20: '🃏',
+    21: 'K♣️', 22: 'K♦️', 23: 'K♥️', 24: 'K♠️',
+    25: '9♣️', 26: '9♦️', 27: '9♥️', 28: '9♠️',
+    29: 'Q♣️', 30: 'Q♦️', 31: 'Q♥️', 32: 'Q♠️',
+    33: '7♣️', 34: '7♦️', 35: '7♥️', 36: '7♠️',
+    37: '6♣️', 38: '6♦️', 39: '6♥️', 40: '6♠️',
+    41: '10♣️', 42: '10♦️', 43: '10♥️', 44: '10♠️',
+    45: '3♣️', 46: '3♦️', 47: '3♥️', 48: '3♠️',
+    49: '2♣️', 50: '2♦️', 51: '2♥️', 52: '2♠️'
 }
 
 @app.route("/")
