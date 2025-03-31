@@ -1,54 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Card Classifier</title>
+    <title>AceAI - Card Classifier</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f4f4f4;
+            background-color: #e8e1d7;
+            color: #1c1f26;
+            flex-direction: column;
+        }
+        .logo-container {
+            background-color: #e8e1d7;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 30px 0;
+            margin-bottom: -20px;
+        }
+        .logo {
+            width: 180px;
         }
         .container {
             text-align: center;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
+            padding: 40px;
+            background-color: white;
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            max-width: 520px;
+            margin-top: 10px;
         }
-        input[type="file"] {
-            padding: 10px;
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .file-drop-area {
+            width: 90%;
+            padding: 20px;
+            border: 2px dashed #1c1f26;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .file-drop-area:hover {
+            background: #f0f0f0;
+        }
+        .file-input {
+            display: none;
         }
         button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #4CAF50;
+            width: 90%;
+            padding: 14px;
+            background-color: #1c1f26;
             color: white;
-            border: none;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 500;
             cursor: pointer;
+            border: none;
+            transition: background 0.3s, transform 0.2s;
+            display: inline-block;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: #333;
+            transform: scale(1.02);
         }
         .result {
             margin-top: 20px;
-            font-size: 20px;
-            color: #333;
+            font-size: 18px;
+            color: #1c1f26;
+            font-weight: 600;
+        }
+        #preview {
+            margin-top: 20px;
+            max-width: 100%;
+            border-radius: 8px;
+            display: none;
         }
     </style>
 </head>
 <body>
+    <div class="logo-container">
+        <img src="../aceAI_logo.png" alt="AceAI Logo" class="logo">
+    </div>
     <div class="container">
         <h1>Card Classifier</h1>
         <form id="uploadForm" enctype="multipart/form-data">
-            <input type="file" id="image" name="image" accept="image/*" required>
+            <div class="file-drop-area" id="drop-area">Drop an image or click to upload
+                <input type="file" id="image" name="image" accept="image/*" class="file-input" required>
+            </div>
             <br>
+            <img id="preview" src="" alt="" style="margin: 20px auto; display: block;">
             <button type="submit">Upload and Predict</button>
         </form>
         <div id="result" class="result"></div>
@@ -57,12 +111,45 @@
     <script>
         const form = document.getElementById('uploadForm');
         const resultDiv = document.getElementById('result');
+        const imageInput = document.getElementById('image');
+        const preview = document.getElementById('preview');
+        const dropArea = document.getElementById('drop-area');
+
+        dropArea.addEventListener('click', () => imageInput.click());
+        dropArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropArea.style.background = "#f0f0f0";
+        });
+        dropArea.addEventListener('dragleave', () => {
+            dropArea.style.background = "white";
+        });
+        dropArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropArea.style.background = "white";
+            imageInput.files = e.dataTransfer.files;
+            handleFile();
+        });
+        imageInput.addEventListener('change', handleFile);
+
+        function handleFile() {
+            const file = imageInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.style.display = 'none';
+            }
+        }
 
         form.addEventListener('submit', async (event) => {
             event.preventDefault();
 
             const formData = new FormData();
-            formData.append('image', document.getElementById('image').files[0]);
+            formData.append('image', imageInput.files[0]);
 
             const response = await fetch('/predict', {
                 method: 'POST',
